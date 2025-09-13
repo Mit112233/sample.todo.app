@@ -1,0 +1,18 @@
+const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  if (inputTask === '') return;
+
+  // 重複チェック
+  const isDuplicate = taskList.some(
+    (task) => task.name.trim().toLowerCase() === inputTask.trim().toLowerCase()
+  );
+  if (isDuplicate) {
+    alert("同じ名前のタスクはすでに存在します");
+    return;
+  }
+
+  const newTask: Task = { id, name: inputTask, isDone: false };
+  setTaskList([...taskList, newTask]);
+  setId(id + 1);
+  setInputTask('');
+};
